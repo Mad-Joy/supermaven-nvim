@@ -1,4 +1,7 @@
 local u = require("supermaven-nvim.util")
+-- <madjoy>
+local ghost_floats = require("utils.ghost_floats")
+-- </madjoy>
 
 local CompletionPreview = {
   inlay_instance = nil,
@@ -66,9 +69,12 @@ function CompletionPreview:render_floating(first_line, opts, buf, line_before_cu
     opts.virt_text = { { u.trim_start(line_before_cursor) .. first_line, self.suggestion_group } }
   end
 
-  opts.virt_text_pos = "eol"
-
-  local _extmark_id = vim.api.nvim_buf_set_extmark(buf, self.ns_id, vim.fn.line(".") - 1, 0, opts) -- :h api-extended-marks
+  -- <madjoy>
+  ghost_floats.show_supermaven_virtual_text(opts)
+  -- opts.virt_text_pos = "eol"
+  
+  -- local _extmark_id = vim.api.nvim_buf_set_extmark(buf, self.ns_id, vim.fn.line(".") - 1, 0, opts) -- :h api-extended-marks
+  -- </madjoy>
 end
 
 function CompletionPreview:render_standard(first_line, other_lines, opts, buf)
@@ -83,9 +89,12 @@ function CompletionPreview:render_standard(first_line, other_lines, opts, buf)
     opts.virt_lines = other_lines
   end
 
-  opts.virt_text_win_col = vim.fn.virtcol(".") - 1
-
-  local _extmark_id = vim.api.nvim_buf_set_extmark(buf, self.ns_id, vim.fn.line(".") - 1, vim.fn.col(".") - 1, opts) -- :h api-extended-marks
+  -- <madjoy>
+  ghost_floats.show_supermaven_virtual_text(opts, other_lines)
+  -- opts.virt_text_win_col = vim.fn.virtcol(".") - 1
+  
+  -- local _extmark_id = vim.api.nvim_buf_set_extmark(buf, self.ns_id, vim.fn.line(".") - 1, vim.fn.col(".") - 1, opts) -- :h api-extended-marks
+  -- </madjoy>
 end
 
 function CompletionPreview:dispose_inlay()
