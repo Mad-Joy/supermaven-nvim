@@ -1,4 +1,6 @@
+
 local u = require("supermaven-nvim.util")
+local mj_buf_set_extmark = require('utils.floating_ghosts')mj_buf_set_extmark
 
 local CompletionPreview = {
   inlay_instance = nil,
@@ -68,7 +70,7 @@ function CompletionPreview:render_floating(first_line, opts, buf, line_before_cu
 
   opts.virt_text_pos = "eol"
 
-  local _extmark_id = vim.api.nvim_buf_set_extmark(buf, self.ns_id, vim.fn.line(".") - 1, 0, opts) -- :h api-extended-marks
+  local _extmark_id = mj_buf_set_extmark(buf, self.ns_id, vim.fn.line(".") - 1, 0, opts) -- :h api-extended-marks
 end
 
 function CompletionPreview:render_standard(first_line, other_lines, opts, buf)
@@ -85,7 +87,7 @@ function CompletionPreview:render_standard(first_line, other_lines, opts, buf)
 
   opts.virt_text_win_col = vim.fn.virtcol(".") - 1
 
-  local _extmark_id = vim.api.nvim_buf_set_extmark(buf, self.ns_id, vim.fn.line(".") - 1, vim.fn.col(".") - 1, opts) -- :h api-extended-marks
+  local _extmark_id = mj_buf_set_extmark(buf, self.ns_id, vim.fn.line(".") - 1, vim.fn.col(".") - 1, opts) -- :h api-extended-marks
 end
 
 function CompletionPreview:dispose_inlay()
@@ -188,3 +190,4 @@ function CompletionPreview.has_suggestion()
 end
 
 return CompletionPreview
+
