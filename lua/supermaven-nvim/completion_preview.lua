@@ -1,6 +1,6 @@
 
 local u = require("supermaven-nvim.util")
-local mj_buf_set_extmark = require('utils.floating_ghosts').mj_buf_set_extmark
+local mj_buf_set_extmark = require('floating_ghosts').mj_buf_set_extmark
 
 local CompletionPreview = {
   inlay_instance = nil,
